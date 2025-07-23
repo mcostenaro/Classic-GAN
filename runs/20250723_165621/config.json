@@ -1,0 +1,13 @@
+{
+  "H_LIST": [
+    "H1",
+    "H2"
+  ],
+  "CSV_VERSION": "baseline",
+  "TARGET_PER_CLASS": 500,
+  "LATENT_DIM": 64,
+  "BATCH_SIZE": 80,
+  "EPOCHS": 100,
+  "LR": 0.0002,
+  "SEED": 42
+}
