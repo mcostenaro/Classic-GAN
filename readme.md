@@ -23,24 +23,8 @@ This repository contains the **data‑engineering layer** for three spin‑1 Ham
 ├── environment.yml
 └── README.md
 ```
-
 ---
 
-## 🚀 Quick start
-
-```bash
-# 1) Create environment
-conda env create -f environment.yml
-conda activate gan_phases
-
-# 2) Convert DMRG output → labeled CSV
-python -m src.make_dataset --tags H1 H2 H3
-
-# 3) Pre‑process (scaling & balancing)
-python -m src.make_processed            # creates baseline / clean / balanced
-```
-
-*Scalers and oversamplers are stored next to each processed CSV so that the exact same transformation can be reused in models or notebooks.*
 
 ---
 
@@ -78,21 +62,10 @@ Each row in the CSV stores pre‑selected correlation functions plus a **phase l
 - `imbalanced‑learn >= 0.13`
 - `joblib`
 
-Install with:
-
-```bash
-mamba env create -f environment.yml
-```
-
 ---
 
-## 📜 License
+## License
 
-MIT — see `LICENSE`.
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 ---
-
-## ✉️ Contact
-
-[feel.free.to.email.me@example.com](mailto\:feel.free.to.email.me@example.com)
 
