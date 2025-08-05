@@ -17,16 +17,14 @@ ROOT = Path(__file__).resolve().parents[1]              # pasta do projeto
 DATA_LABELED = ROOT / "data" / "labeled"              # CSVs brutos rotulados
 
 
-def prep_data(df1, df2, df_test):
+def prep_data(df_train, df_test):
 
-    #load data
-    df_train = pd.concat([df1, df2], ignore_index=True)
 
-    params_train = df_train.iloc[:, :2].to_numpy()
+    params_train = df_train.iloc[:, :2]
     X_aux = df_train.iloc[:, 2:-1].to_numpy(dtype=np.float32)
     y_aux = df_train["labels"].to_numpy()
 
-    params_test = df_test.iloc[:, :2].to_numpy()
+    params_test = df_test.iloc[:, :2]
     X_test = df_test.iloc[:, 2:-1].to_numpy(dtype=np.float32)
     y_test = df_test["labels"].to_numpy()
 
@@ -106,8 +104,11 @@ def main():
     df2 = load_raw("H3")  # Ex.: "H3_labeled.csv"
     df_test = load_raw("H2")  # Ex.: "H2_labeled.csv"
 
+
+    df_train = pd.concat([df1, df2], ignore_index=True)
+
     # Rodar pipeline
-    X_train, y_train, X_test, y_test, _, _ = prep_data(df1, df2, df_test)
+    X_train, y_train, X_test, y_test, _, _ = prep_data(df_train, df_test)
 
     # Exibir shapes para conferir se bate com o esperado
     print(f"Treino: {X_train.shape}, {y_train.shape}")
