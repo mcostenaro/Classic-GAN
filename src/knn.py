@@ -1,10 +1,3 @@
-"""
-IMPORTANTE:
-- As funções principais deste módulo devem ser importadas em notebooks ou scripts de experimento.
-- O main() é apenas para testes locais.
-- Para usar plot_diagram(), crie sua própria lista theoretical_list carregando os arquivos desejados no seu notebook.
-"""
-
 import pathlib as pl
 import matplotlib.pyplot as plt
 import numpy as np
@@ -67,6 +60,31 @@ def set_train_test(H_list, H_test):
         params_test = params_test[mask]
 
     return X_train, y_train, X_test_filtered, y_test_filtered, params_test
+
+
+def set_train_test_aug(H_list, H_test, aug_csv_path, concat=True):
+    aux_copy = H_list.copy()
+    df_test = aux_copy.pop(H_test - 1) 
+    df_train_real = pd.concat(aux_copy, ignore_index=True)
+
+    df_aug = pd.read_csv(aug_csv_path)
+
+    if concat:
+        df_train = pd.concat([df_train_real, df_aug], ignore_index=True)
+    else:
+        df_train = df_aug
+
+    X_train, y_train, X_test, y_test, params_train, params_test = prep_data(df_train, df_test)
+
+    # Filtra fases inexistentes no treino
+    phases_train = np.unique(y_train)
+    mask = np.isin(y_test, phases_train)
+    X_test_filtered, y_test_filtered = X_test[mask], y_test[mask]
+    if params_test is not None:
+        params_test = params_test[mask]
+
+    return X_train, y_train, X_test_filtered, y_test_filtered, params_test
+
 
 # ------------------------------------------------------------
 # 4) KNN

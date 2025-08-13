@@ -1,7 +1,7 @@
 # src/make_dataset.py
 import pandas as pd
 import pathlib as pl
-import labeling.Rotulador as R  # já carrega dfXXZ, dfBond, dfBilinear com labels
+import labeling.labeler as R  # já carrega dfXXZ, dfBond, dfBilinear com labels
 
 ROOT = pl.Path(__file__).resolve().parents[1]  # volta para gan_fases/
 DATA = ROOT / "data"
